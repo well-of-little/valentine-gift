@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>情人节快乐 ❤️</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        body {
+            background: #fff5f7;
+
+            font-family:
+                "Microsoft YaHei",
+                "PingFang SC",
+                sans-serif;
+
+            color: #555;
+        }
+
+
+
+        /* =====================================
+           页面
+        ===================================== */
+
+        .page {
+
+            display: none;
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-direction: column;
+
+            padding: 30px 20px;
+
+            text-align: center;
+        }
+
+
+        .page.active {
+            display: flex;
+        }
+
+
+
+        /* =====================================
+           爱心 / 星星 / 小花飘落
+        ===================================== */
+
+        #falling-container {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 9999;
+        }
+
+
+        .falling-item {
+
+            position: absolute;
+
+            top: -40px;
+
+            user-select: none;
+
+            pointer-events: none;
+
+            animation-name: falling;
+
+            animation-timing-function: linear;
+
+            animation-iteration-count: 1;
+
+            will-change:
+                transform,
+                opacity;
+        }
+
+
+        @keyframes falling {
+
+            0% {
+
+                transform:
+                    translate3d(
+                        0,
+                        -40px,
+                        0
+                    )
+                    rotate(0deg);
+
+                opacity: 0;
+
+            }
+
+
+            10% {
+
+                opacity: 0.85;
+
+            }
+
+
+            25% {
+
+                transform:
+                    translate3d(
+                        20px,
+                        25vh,
+                        0
+                    )
+                    rotate(45deg);
+
+            }
+
+
+            50% {
+
+                transform:
+                    translate3d(
+                        -20px,
+                        50vh,
+                        0
+                    )
+                    rotate(120deg);
+
+            }
+
+
+            75% {
+
+                transform:
+                    translate3d(
+                        20px,
+                        75vh,
+                        0
+                    )
+                    rotate(200deg);
+
+            }
+
+
+            90% {
+
+                opacity: 0.7;
+
+            }
+
+
+            100% {
+
+                transform:
+                    translate3d(
+                        -10px,
+                        110vh,
+                        0
+                    )
+                    rotate(300deg);
+
+                opacity: 0;
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           第一页：封面
+        ===================================== */
+
+        #page1 {
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #fff7fa,
+                    #ffeef3
+                );
+        }
+
+
+        .envelope-area {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        .envelope {
+
+            position: relative;
+
+            width: 300px;
+            height: 200px;
+
+            background: #f39ab0;
+
+            border-radius:
+                0 0 18px 18px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(200, 80, 110, 0.25);
+
+            overflow: visible;
+
+            perspective: 800px;
+        }
+
+
+        /* 信纸 */
+
+        .letter-paper {
+
+            position: absolute;
+
+            left: 50%;
+
+            bottom: 20px;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+
+            width: 220px;
+
+            height: 155px;
+
+            background: #fffdf8;
+
+            border-radius: 5px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 45px;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.12);
+
+            z-index: 1;
+
+            transition:
+                transform 1s ease,
+                box-shadow 1s ease;
+        }
+
+
+        /* 信封翻盖 */
+
+        .envelope-flap {
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 0;
+            height: 0;
+
+            border-left:
+                150px solid transparent;
+
+            border-right:
+                150px solid transparent;
+
+            border-top:
+                110px solid #ffc1cf;
+
+            transform-origin: top center;
+
+            z-index: 4;
+
+            transition:
+                transform 1s ease;
+        }
+
+
+        /* 中间爱心 */
+
+        .heart {
+
+            position: absolute;
+
+            left: 50%;
+            top: 52%;
+
+            transform:
+                translate(-50%, -50%);
+
+            font-size: 42px;
+
+            z-index: 5;
+
+            filter:
+                drop-shadow(
+                    0 3px 5px
+                    rgba(0,0,0,0.15)
+                );
+
+            transition:
+                opacity 0.5s ease;
+        }
+
+
+        /* 情人节快乐 */
+
+        .envelope-title {
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            bottom: 35px;
+
+            z-index: 3;
+
+            color: white;
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            transition:
+                opacity 0.5s ease;
+        }
+
+
+        /* 信封打开 */
+
+        .envelope.open
+        .envelope-flap {
+
+            transform:
+                rotateX(180deg);
+        }
+
+
+        /* 信纸升起 */
+
+        .envelope.open
+        .letter-paper {
+
+            transform:
+                translateX(-50%)
+                translateY(-120px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(0,0,0,0.15);
+
+            z-index: 6;
+        }
+
+
+        /* 爱心消失 */
+
+        .envelope.open
+        .heart {
+
+            opacity: 0;
+        }
+
+
+        /* 文字消失 */
+
+        .envelope.open
+        .envelope-title {
+
+            opacity: 0;
+        }
+
+
+        .cover-text {
+
+            margin-top: 28px;
+
+            color: #d95a7b;
+
+            font-size: 16px;
+        }
+
+
+
+        /* =====================================
+           按钮
+        ===================================== */
+
+        .next-button {
+
+            margin-top: 25px;
+
+            padding:
+                14px
+                32px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ed6c91,
+                    #d94e77
+                );
+
+            color: white;
+
+            font-size: 17px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(220, 80, 120, 0.25);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s;
+        }
+
+
+        .next-button:active {
+
+            transform:
+                scale(0.95);
+        }
+
+
+
+        /* =====================================
+           时间线
+        ===================================== */
+
+        #page2 {
+
+            min-height: 100vh;
+
+            justify-content:
+                flex-start;
+
+            overflow-y: auto;
+
+            padding-top: 30px;
+
+            padding-bottom: 50px;
+        }
+
+
+        .section-title {
+
+            color: #d95075;
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .timeline-image {
+
+            display: block;
+
+            width: auto;
+
+            max-width: 94%;
+
+            height: auto;
+
+            max-height: 72vh;
+
+            object-fit: contain;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.12);
+        }
+
+
+        .timeline-tip {
+
+            margin-top: 18px;
+
+            color: #999;
+
+            font-size: 14px;
+        }
+
+
+
+        /* =====================================
+           故事页面
+        ===================================== */
+
+        #page3 {
+
+            display: none;
+
+            min-height: 100vh;
+
+            padding:
+                40px
+                18px
+                70px;
+
+            overflow-y: auto;
+
+            justify-content:
+                flex-start;
+        }
+
+
+        #page3.active {
+
+            display: block;
+        }
+
+
+        .story-title {
+
+            text-align: center;
+
+            color: #d95075;
+
+            font-size: 30px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .story-item {
+
+            width: 100%;
+
+            max-width: 500px;
+
+            margin:
+                0 auto
+                35px;
+
+            padding: 20px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0,0,0,0.08);
+        }
+
+
+        .story-item h2 {
+
+            color: #df5b7c;
+
+            font-size: 22px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .story-item img {
+
+            display: block;
+
+            width: 100%;
+
+            height: auto;
+
+            border-radius: 14px;
+        }
+
+
+        .story-item p {
+
+            margin-top: 15px;
+
+            line-height: 1.8;
+
+            color: #777;
+
+            font-size: 15px;
+        }
+
+
+        .story-item .two-images {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+
+        .story-end {
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            margin-bottom: 30px;
+        }
+
+
+
+        /* =====================================
+           刮刮乐
+        ===================================== */
+
+        #page4 {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff5f8,
+                    #ffeef4
+                );
+        }
+
+
+        .scratch-title {
+
+            color: #d95075;
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .scratch-subtitle {
+
+            color: #999;
+
+            font-size: 14px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .scratch-box {
+
+            position: relative;
+
+            width: 92%;
+
+            max-width: 420px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.12);
+
+            background: white;
+        }
+
+
+        #letter {
+
+            display: block;
+
+            width: 100%;
+
+            height: auto;
+        }
+
+
+        #scratchCanvas {
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            touch-action: none;
+
+            cursor: crosshair;
+        }
+
+
+        .scratch-tip {
+
+            margin-top: 20px;
+
+            color: #d45a79;
+
+            font-size: 16px;
+        }
+
+
+        .scratch-heart {
+
+            margin-top: 10px;
+
+            font-size: 24px;
+        }
+
+
+
+        /* =====================================
+           刮开后的隐藏文字
+        ===================================== */
+
+        #hiddenMessage {
+
+            margin-top: 25px;
+
+            text-align: center;
+
+            opacity: 0;
+
+            transform:
+                translateY(20px);
+
+            transition:
+                opacity 1.5s ease,
+                transform 1.5s ease;
+
+            pointer-events: none;
+        }
+
+
+        #hiddenMessage.show-message {
+
+            opacity: 1;
+
+            transform:
+                translateY(0);
+        }
+
+
+        #hiddenMessage p {
+
+            margin-top: 8px;
+
+            color: #d65378;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+        }
+
+
+        .hidden-line {
+
+            width: 45px;
+
+            height: 2px;
+
+            margin:
+                0 auto 15px;
+
+            background: #e58aa3;
+        }
+
+
+
+        /* =====================================
+           手机适配
+        ===================================== */
+
+        @media (max-width: 600px) {
+
+            .envelope {
+
+                width: 270px;
+
+                height: 180px;
+            }
+
+
+            .envelope-flap {
+
+                border-left-width: 135px;
+
+                border-right-width: 135px;
+
+                border-top-width: 100px;
+            }
+
+
+            .envelope-title {
+
+                font-size: 24px;
+
+                bottom: 30px;
+            }
+
+
+            .heart {
+
+                font-size: 38px;
+            }
+
+
+            .section-title {
+
+                font-size: 25px;
+            }
+
+
+            .timeline-image {
+
+                max-width: 96%;
+
+                max-height: 70vh;
+            }
+
+
+            .story-title {
+
+                font-size: 27px;
+            }
+
+
+            .story-item h2 {
+
+                font-size: 20px;
+            }
+
+
+            .falling-item {
+
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+<!-- =====================================
+     飘落效果
+===================================== -->
+
+<div id="falling-container"></div>
+
+
+
+<!-- =====================================
+     背景音乐
+===================================== -->
+
+<audio id="bgMusic" loop>
+
+    <source
+        src="music/love.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+
+<!-- =====================================
+     第一页：信封
+===================================== -->
+
+<section
+    class="page active"
+    id="page1">
+
+
+    <div class="envelope-area">
+
+
+        <div
+            class="envelope"
+            id="envelope">
+
+
+            <div class="envelope-flap">
+            </div>
+
+
+            <div class="letter-paper">
+
+                💌
+
+            </div>
+
+
+            <div class="heart">
+
+                ❤️
+
+            </div>
+
+
+            <div class="envelope-title">
+
+                情人节快乐
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="cover-text">
+
+            有一封信，想亲手交给你
+
+        </div>
+
+
+
+        <button
+            class="next-button"
+            id="openButton"
+            onclick="openEnvelope()">
+
+            打开这封信
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================
+     第二页：时间线
+===================================== -->
+
+<section
+    class="page"
+    id="page2">
+
+
+    <h1 class="section-title">
+
+        我们的故事
+
+    </h1>
+
+
+    <img
+        class="timeline-image"
+        src="images/timeline.jpg"
+        alt="我们的时间线">
+
+
+    <div class="timeline-tip">
+
+        这一切，都是属于我们的回忆 ❤️
+
+    </div>
+
+
+    <button
+        class="next-button"
+        onclick="showPage('page3')">
+
+        继续往下看
+
+    </button>
+
+
+</section>
+
+
+
+<!-- =====================================
+     第三页：故事
+===================================== -->
+
+<section
+    class="page"
+    id="page3">
+
+
+    <h1 class="story-title">
+
+        我们的故事 ❤️
+
+    </h1>
+
+
+
+    <!-- 第一次互加 VX -->
+
+    <div class="story-item">
+
+        <h2>
+
+            第一次互加 VX 好友
+
+        </h2>
+
+
+        <img
+            src="images/vx.jpg"
+            alt="第一次互加VX好友">
+
+
+        <p>
+
+            从那一天开始，
+            我们慢慢走进了彼此的生活。
+
+        </p>
+
+    </div>
+
+
+
+    <!-- 第一次一起通宵 -->
+
+    <div class="story-item">
+
+        <h2>
+
+            第一次一起通宵
+
+        </h2>
+
+
+        <img
+            src="images/night.jpg"
+            alt="第一次一起通宵">
+
+
+        <p>
+
+            那一晚，我们聊了很多很多。
+            也许就是从那时候开始，
+            我越来越习惯有你的陪伴。
+
+        </p>
+
+    </div>
+
+
+
+    <!-- 第一次互表心意 -->
+
+    <div class="story-item">
+
+        <h2>
+
+            第一次互表心意
+
+        </h2>
+
+
+        <div class="two-images">
+
+
+            <img
+                src="images/love.jpg"
+                alt="第一次互表心意">
+
+
+            <img
+                src="images/love2.jpg"
+                alt="第一次互表心意">
+
+
+        </div>
+
+
+        <p>
+
+            有些心意终于被彼此听见。
+            谢谢你，也谢谢那时候勇敢的我们。
+
+        </p>
+
+    </div>
+
+
+
+    <!-- 第一次打一晚上语音 -->
+
+    <div class="story-item">
+
+        <h2>
+
+            第一次打一晚上语音
+
+        </h2>
+
+
+        <img
+            src="images/voice.jpg"
+            alt="第一次打一晚上语音">
+
+
+        <p>
+
+            那个夜晚，
+            我们就这样一直聊到了天亮。
+
+        </p>
+
+    </div>
+
+
+
+    <!-- 第一次和好 -->
+
+    <div class="story-item">
+
+        <h2>
+
+            第一次和好
+
+        </h2>
+
+
+        <img
+            src="images/together.jpg"
+            alt="第一次和好">
+
+
+        <p>
+
+            我们也有过不开心，
+            但最后还是选择了彼此。
+
+        </p>
+
+    </div>
+
+
+
+    <div class="story-end">
+
+        <p>
+
+            故事还没有结束……
+
+        </p>
+
+
+        <button
+            class="next-button"
+            onclick="showPage('page4')">
+
+            最后的礼物 💌
+
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================
+     第四页：刮刮乐
+===================================== -->
+
+<section
+    class="page"
+    id="page4">
+
+
+    <h1 class="scratch-title">
+
+        最后的礼物
+
+    </h1>
+
+
+    <p class="scratch-subtitle">
+
+        有一封信，想让你亲手打开
+
+    </p>
+
+
+
+    <div class="scratch-box">
+
+
+        <img
+            id="letter"
+            src="images/letter.jpg"
+            alt="情书">
+
+
+        <canvas
+            id="scratchCanvas">
+        </canvas>
+
+
+    </div>
+
+
+
+    <div class="scratch-tip">
+
+        用手指慢慢刮开它 ❤️
+
+    </div>
+
+
+    <div class="scratch-heart">
+
+        💗
+
+    </div>
+
+
+
+    <!-- 隐藏彩蛋 -->
+
+    <div id="hiddenMessage">
+
+
+        <div class="hidden-line">
+        </div>
+
+
+        <p>
+
+            我们的故事还没有结束。
+
+        </p>
+
+
+        <p>
+
+            以后还有好多好多的第一次，
+            想和你一起经历。❤️
+
+        </p>
+
+
+    </div>
+
+
+</section>
+
+
+
+<script>
+
+
+/* =====================================
+   信封打开动画
+===================================== */
+
+function openEnvelope() {
+
+
+    const envelope =
+        document.getElementById(
+            "envelope"
+        );
+
+
+    const button =
+        document.getElementById(
+            "openButton"
+        );
+
+
+    if (
+        envelope.classList.contains(
+            "open"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    /* 信封打开 */
+
+    envelope.classList.add(
+        "open"
+    );
+
+
+    /* 防止重复点击 */
+
+    button.disabled = true;
+
+    button.style.opacity = "0.5";
+
+
+    /* 开始音乐 */
+
+    const music =
+        document.getElementById(
+            "bgMusic"
+        );
+
+
+    if (music) {
+
+        music.volume = 0.35;
+
+
+        music.play().catch(
+            function(error) {
+
+                console.log(
+                    "音乐播放失败:",
+                    error
+                );
+
+            }
+        );
+
+    }
+
+
+    /* 动画结束后进入时间线 */
+
+    setTimeout(
+        function() {
+
+            showPage("page2");
+
+        },
+        1800
+    );
+
+}
+
+
+
+/* =====================================
+   页面切换
+===================================== */
+
+function showPage(pageId) {
+
+
+    const pages =
+        document.querySelectorAll(
+            ".page"
+        );
+
+
+    pages.forEach(
+        function(page) {
+
+            page.classList.remove(
+                "active"
+            );
+
+        }
+    );
+
+
+    const target =
+        document.getElementById(
+            pageId
+        );
+
+
+    target.classList.add(
+        "active"
+    );
+
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+
+    /* 进入刮刮乐页面 */
+
+    if (
+        pageId === "page4"
+    ) {
+
+        setTimeout(
+            function() {
+
+                setupScratch();
+
+            },
+            50
+        );
+
+    }
+
+}
+
+
+
+/* =====================================
+   爱心 / 星星 / 小花飘落
+===================================== */
+
+const fallingContainer =
+    document.getElementById(
+        "falling-container"
+    );
+
+
+const fallingSymbols = [
+
+    "❤️",
+    "✨",
+    "🌸"
+
+];
+
+
+function createFallingItem() {
+
+
+    const item =
+        document.createElement(
+            "div"
+        );
+
+
+    item.className =
+        "falling-item";
+
+
+    /* 随机选择三个元素 */
+
+    item.textContent =
+        fallingSymbols[
+            Math.floor(
+                Math.random()
+                *
+                fallingSymbols.length
+            )
+        ];
+
+
+    /* 随机横向位置 */
+
+    item.style.left =
+        Math.random() * 100 + "%";
+
+
+    /* 随机大小 */
+
+    const size =
+        14 +
+        Math.random() * 12;
+
+
+    item.style.fontSize =
+        size + "px";
+
+
+    /* 随机透明度 */
+
+    item.style.opacity =
+        0.45 +
+        Math.random() * 0.4;
+
+
+    /* 随机速度 */
+
+    const duration =
+        7 +
+        Math.random() * 6;
+
+
+    item.style.animationDuration =
+        duration + "s";
+
+
+    /* 随机延迟 */
+
+    item.style.animationDelay =
+        Math.random() * 1.5 + "s";
+
+
+    fallingContainer.appendChild(
+        item
+    );
+
+
+    /* 动画结束后删除 */
+
+    setTimeout(
+        function() {
+
+            item.remove();
+
+        },
+        (duration + 3) * 1000
+    );
+
+}
+
+
+/* 每隔一段时间产生一个 */
+
+setInterval(
+    createFallingItem,
+    650
+);
+
+
+/* 刚打开时先产生几个 */
+
+for (
+    let i = 0;
+    i < 8;
+    i++
+) {
+
+    setTimeout(
+        createFallingItem,
+        i * 250
+    );
+
+}
+
+
+
+/* =====================================
+   刮刮乐
+===================================== */
+
+let scratchReady = false;
+
+
+function setupScratch() {
+
+
+    const canvas =
+        document.getElementById(
+            "scratchCanvas"
+        );
+
+
+    const letter =
+        document.getElementById(
+            "letter"
+        );
+
+
+    if (
+        !canvas ||
+        !letter
+    ) {
+
+        return;
+
+    }
+
+
+    const width =
+        letter.clientWidth;
+
+
+    const height =
+        letter.clientHeight;
+
+
+    if (
+        width === 0 ||
+        height === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+
+    canvas.width =
+        width * dpr;
+
+
+    canvas.height =
+        height * dpr;
+
+
+    canvas.style.width =
+        width + "px";
+
+
+    canvas.style.height =
+        height + "px";
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    /* 覆盖层 */
+
+    ctx.globalCompositeOperation =
+        "source-over";
+
+
+    const gradient =
+        ctx.createLinearGradient(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+    gradient.addColorStop(
+        0,
+        "#f6a7bb"
+    );
+
+
+    gradient.addColorStop(
+        1,
+        "#e985a3"
+    );
+
+
+    ctx.fillStyle =
+        gradient;
+
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    /* 覆盖层文字 */
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.9)";
+
+
+    ctx.font =
+        "bold 20px Microsoft YaHei";
+
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.textBaseline =
+        "middle";
+
+
+    ctx.fillText(
+        "刮开看看 ❤️",
+        width / 2,
+        height / 2
+    );
+
+
+    scratchReady = true;
+
+}
+
+
+
+/* =====================================
+   刮除
+===================================== */
+
+let scratching = false;
+
+
+function eraseAt(
+    clientX,
+    clientY
+) {
+
+
+    if (!scratchReady) {
+
+        return;
+
+    }
+
+
+    const canvas =
+        document.getElementById(
+            "scratchCanvas"
+        );
+
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const x =
+        clientX -
+        rect.left;
+
+
+    const y =
+        clientY -
+        rect.top;
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    ctx.globalCompositeOperation =
+        "destination-out";
+
+
+    ctx.beginPath();
+
+
+    ctx.arc(
+        x,
+        y,
+        30,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fill();
+
+
+    checkScratchProgress();
+
+}
+
+
+
+/* =====================================
+   检测刮掉多少
+===================================== */
+
+function checkScratchProgress() {
+
+
+    const canvas =
+        document.getElementById(
+            "scratchCanvas"
+        );
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    const width =
+        canvas.width;
+
+
+    const height =
+        canvas.height;
+
+
+    const imageData =
+        ctx.getImageData(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+    const pixels =
+        imageData.data;
+
+
+    let transparent = 0;
+
+    let total = 0;
+
+
+    for (
+        let i = 3;
+        i < pixels.length;
+        i += 40
+    ) {
+
+
+        total++;
+
+
+        if (
+            pixels[i] < 50
+        ) {
+
+            transparent++;
+
+        }
+
+    }
+
+
+    const progress =
+        transparent / total;
+
+
+    /* 刮掉50%显示隐藏文字 */
+
+    if (
+        progress > 0.5
+    ) {
+
+
+        const message =
+            document.getElementById(
+                "hiddenMessage"
+            );
+
+
+        message.classList.add(
+            "show-message"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================
+   鼠标刮除
+===================================== */
+
+const canvas =
+    document.getElementById(
+        "scratchCanvas"
+    );
+
+
+canvas.addEventListener(
+    "mousedown",
+    function(e) {
+
+
+        scratching = true;
+
+
+        eraseAt(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+canvas.addEventListener(
+    "mousemove",
+    function(e) {
+
+
+        if (!scratching) {
+
+            return;
+
+        }
+
+
+        eraseAt(
+            e.clientX,
+            e.clientY
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "mouseup",
+    function() {
+
+        scratching = false;
+
+    }
+);
+
+
+
+/* =====================================
+   手机触摸刮除
+===================================== */
+
+canvas.addEventListener(
+    "touchstart",
+    function(e) {
+
+
+        e.preventDefault();
+
+
+        scratching = true;
+
+
+        const touch =
+            e.touches[0];
+
+
+        eraseAt(
+            touch.clientX,
+            touch.clientY
+        );
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+
+canvas.addEventListener(
+    "touchmove",
+    function(e) {
+
+
+        e.preventDefault();
+
+
+        if (!scratching) {
+
+            return;
+
+        }
+
+
+        const touch =
+            e.touches[0];
+
+
+        eraseAt(
+            touch.clientX,
+            touch.clientY
+        );
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+
+canvas.addEventListener(
+    "touchend",
+    function(e) {
+
+
+        e.preventDefault();
+
+
+        scratching = false;
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+
+/* =====================================
+   窗口大小变化
+===================================== */
+
+window.addEventListener(
+    "resize",
+    function() {
+
+
+        if (
+            document
+                .getElementById("page4")
+                .classList
+                .contains("active")
+        ) {
+
+
+            scratchReady =
+                false;
+
+
+            setupScratch();
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
